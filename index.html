@@ -30,6 +30,12 @@
       color: #fbbb20;
       font-family: 'Claudia';
       margin-top: 10px;
+
+      @media (max-width: 600px) {
+  #counter {
+    font-size: 3em; 
+  }
+}
     
     }
     .button {
@@ -50,7 +56,7 @@
     .banana {
       position: absolute;
       width: 40px;
-      animation: fall 2s linear infinite;
+      animation: fall 10s linear infinite;
     }
     @keyframes fall {
       0% { transform: translateY(-100px); }
