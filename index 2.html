@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Equifruit Counter Game</title>
+  <style>
+    @font-face {
+      font-family: 'Claudia';
+      src: url('assets/ClaudiaShouter-Black.otf');
+    }
+    @font-face {
+      font-family: 'Retor';
+      src: url('assets/Retor-Bold.otf');
+    }
+    body {
+      font-family: 'Claudia', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: #eae3da;
+      color: #2e2624;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    #counter {
+      font-size: 5em;
+      color: #fbbb20;
+      font-family: 'Claudia';
+      margin-top: 10px;
+    
+    }
+    .button {
+      padding: 15px 30px;
+      font-size: 1.5em;
+      font-family: 'Claudia';
+      margin: 10px;
+      cursor: pointer;
+      color: #2e2624;
+      border: none;
+    }
+    #start {
+      background-color: #f08050;
+    }
+    #stop {
+      background-color: #9ac9b5;
+    }
+    .banana {
+      position: absolute;
+      width: 40px;
+      animation: fall 2s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px); }
+      100% { transform: translateY(100vh); }
+    }
+    #popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    #popup-content {
+      position: relative;
+      margin: 10% auto;
+      background-color: #fbbb20;
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+      font-family: 'Retor';
+      font-size: 1.5em;
+      color: #2e2624;
+    }
+    #form-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 15px 25px;
+      background-color: #2e2624;
+      color: #eae3da;
+      font-family: 'Claudia';
+      font-size: 1.2em;
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    .header-image {
+  width: 1000px;
+  display: block;
+  margin: 10px auto;
+}
+    .button-wrapper {
+  margin-bottom: 10px;
+}
+  </style>
+</head>
+<body>
+  <img src="assets/test.png" alt="Header Image" class="header-image" />
+
+  <div id="counter">0 $ US</div>
+
+<div class="button-wrapper"></div>
+  <button class="button" id="start">DÉMARRER</button>
+  <button class="button" id="stop">ARRÊTER</button>
+</div>
+
+  <div id="popup">
+    <div id="popup-content">
+      Le montant de la Prime Fairtrade est de +1 000 000 $ US. 🎉 Merci de votre participation ! Cliquez ci-dessous pour partager vos informations de contact et tenter de gagner des cadeaux Equifruit.
+      <br/>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdAGzFYL3Fya0qGOd1hLLQ6nHXTwf99oduySDJM5SPLTp4GKQ/viewform?usp=dialog" id="form-button" target="_blank">
+        PARTICIPER AU TIRAGE
+      </a>
+    </div>
+  </div>
+
+  <script>
+    let counter = 0;
+    let interval;
+
+let triggeredByStop = false;
+
+    const counterElement = document.getElementById("counter");
+  const popup = document.getElementById("popup");
+
+  function updateCounter() {
+    if (counter < 900000) {
+      counter += 50000;
+    } else {
+      counter += 10000;
+    }
+    counterElement.innerHTML = counter.toLocaleString('fr-CA') + " $ US";
+  }
+
+  function dropBananas() {
+    for (let i = 0; i < 60; i++) {
+      const banana = document.createElement("img");
+      banana.src = "assets/Equifruit_Icon_Left_RGB.png";
+      banana.classList.add("banana");
+      banana.style.position = "absolute";
+      banana.style.left = Math.random() * window.innerWidth + "px";
+      banana.style.top = "-50px";
+      banana.style.width = "40px";
+      banana.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+      document.body.appendChild(banana);
+
+      setTimeout(() => {
+        banana.remove();
+      }, 5000);
+    }
+  }
+
+  document.getElementById("start").onclick = () => {
+    interval = setInterval(updateCounter, 100);
+  };
+
+  document.getElementById("stop").onclick = () => {
+    clearInterval(interval);
+
+    if (counter >= 1000000 && counter <= 1050000) {
+      dropBananas();
+    }
+
+    showPopup();
+  };
+
+  function showPopup() {
+    popup.style.display = "block";
+  }
+</script>
+</body>
+</html>
