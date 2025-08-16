@@ -30,12 +30,14 @@
       color: #fbbb20;
       font-family: 'Claudia';
       margin-top: 10px;
-      
- @media (max-width: 600px) {
+      white-space: nowrap; /* prevents line break */
+      overflow-x: auto;     /* allows scrolling if still too long */
+    }
+    @media (max-width: 600px) {
       #counter {
         font-size: 2em; 
+      }
     }
-}
     
     }
     .button {
