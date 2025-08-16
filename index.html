@@ -30,15 +30,17 @@
       color: #fbbb20;
       font-family: 'Claudia';
       margin-top: 10px;
-      white-space: nowrap; /* prevents line break */
-      overflow-x: auto;     /* allows scrolling if still too long */
-    }
+      
     @media (max-width: 600px) {
       #counter {
         font-size: 2em; 
       }
     }
-    
+    .currency {
+      font-size: 1em; /* Optional: makes it smaller */
+      display: block;
+      margin-top: 0.2em; /* Optional: space between number and currency */
+    }
     }
     .button {
       padding: 15px 30px;
@@ -106,7 +108,7 @@
 <body>
   <img src="assets/image 1.png" alt="Image 1" class="header-image" />
   <img src="assets/image 2.png" alt="Image 2" class="header-image"/>
-  <div id="counter">0&nbsp;$US</div>
+  <div id="counter">0&nbsp;$ US</div>
 
 <div class="button-wrapper"></div>
   <button class="button" id="start">DÉMARRER</button>
@@ -138,7 +140,7 @@ let triggeredByStop = false;
     } else {
       counter += 10000;
     }
-    counterElement.innerHTML = counter.toLocaleString('fr-CA') + "&nbsp;$US";
+    counterElement.innerHTML = counter.toLocaleString('fr-CA') + "<br><span class='currency'>$ US</span>";
   }
 
   function dropBananas() {
